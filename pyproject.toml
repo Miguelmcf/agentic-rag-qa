@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-rag-qa"
+version = "0.1.0"
+description = "An agentic Retrieval-Augmented Generation (RAG) document Q&A service built with LangGraph, Hugging Face embeddings, and a vector database."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Miguel Ferreira", email = "miguelmcferreira@ua.pt" }]
+keywords = ["rag", "langgraph", "agents", "llm", "embeddings", "vector-database", "fastapi"]
+
+dependencies = [
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "numpy>=1.26",
+    "langgraph>=0.2.0",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    # Real semantic embeddings via Hugging Face sentence-transformers.
+    "sentence-transformers>=2.7",
+    # Lets model downloads work behind TLS-inspecting corporate proxies.
+    "truststore>=0.9",
+]
+
+[project.optional-dependencies]
+# Persistent vector database backend.
+chroma = ["chromadb>=0.5"]
+# Hosted LLM providers (bring your own API key).
+openai = ["openai>=1.30"]
+gemini = ["google-generativeai>=0.7"]
+# Everything needed to develop and test the project.
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+    "ruff>=0.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/Miguelmcf/agentic-rag-qa"
+Repository = "https://github.com/Miguelmcf/agentic-rag-qa"
+
+[project.scripts]
+agentic-rag = "agentic_rag.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

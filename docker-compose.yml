@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Defaults keep everything offline. Override to use real models/providers:
+      # RAG_LLM_PROVIDER: openai
+      # RAG_OPENAI_API_KEY: ${OPENAI_API_KEY}
+      # RAG_EMBEDDING_BACKEND: huggingface
+      RAG_LLM_PROVIDER: echo
+      RAG_EMBEDDING_BACKEND: hashing
+      RAG_VECTOR_STORE: memory
+    volumes:
+      - ./data:/app/data
