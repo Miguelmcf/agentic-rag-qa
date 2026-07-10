@@ -88,6 +88,27 @@ agentic-rag ask "How does RAG reduce hallucinations?" --ingest data/sample_docs
 Running somewhere without network access (e.g. CI)? Use the dependency-free
 embedding fallback: `export RAG_EMBEDDING_BACKEND=hashing`.
 
+## Demo
+
+The agent retrieves the relevant passage and answers with a citation back to the
+source document:
+
+```console
+$ agentic-rag ask "What is Saturn famous for?" --ingest data/sample_docs
+
+Q: What is Saturn famous for?
+A: Based on the retrieved context: Saturn is famous for its extensive and bright
+   ring system, made mostly of ice particles. [1]
+
+Sources:
+  [1] solar_system.md - # The Solar System The Solar System formed roughly 4.6 ...
+  [2] solar_system.md - ... Earth is the only planet currently known to support life.
+```
+
+<!-- Tip: record a short terminal GIF (e.g. with asciinema or ScreenToGif),
+     save it to docs/demo.gif, and uncomment the line below to show it here. -->
+<!-- ![CLI demo](docs/demo.gif) -->
+
 ## Run the API
 
 ```bash
